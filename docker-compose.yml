@@ -44,7 +44,7 @@ services:
       volumes:
         - ./frontend:/var/www/frontend:delegated
       ports:
-        - "80:8080"
+        - "80:8080"   # for production mode
         - "8081:8081" # for development mode
 
 volumes:
