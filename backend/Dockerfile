@@ -6,7 +6,7 @@ COPY package*.json ./
 
 RUN npm install
 
-EXPOSE 8080
+EXPOSE 3080
 
 CMD ["npm", "start"]
 
@@ -17,6 +17,6 @@ WORKDIR /usr/src/app/backend
 
 COPY --from=dev /usr/src/app/backend .
 
-EXPOSE 8080
+EXPOSE 3080
 
 CMD [ "node", "server.js" ]

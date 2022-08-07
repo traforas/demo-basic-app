@@ -39,12 +39,15 @@ FROM nginx:alpine as prod
 ARG REACT_APP_APP_URL
 ARG REACT_APP_BASE_API
 
+ENV REACT_APP_APP_URL $REACT_APP_APP_URL
+ENV REACT_APP_BASE_API $REACT_APP_BASE_API
+
 # copy config files
 COPY .docker/files /
 
 # setup workdir (next commands will run under this context, but also the running container will inherit this - if not overriden at runtime)
 WORKDIR /var/www/frontend
 
-EXPOSE 8080
+COPY --from=dev /var/www/frontend/build ./build
 
-COPY --from=dev /var/www/frontend/app/build ./build
+EXPOSE 8080
