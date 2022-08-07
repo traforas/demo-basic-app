@@ -1,0 +1,54 @@
+version: '3'
+services:
+  backend:
+    container_name: bunnyshell-books-backend
+    build:
+      context: ./backend
+      target: ${FRONTEND_BUILD_TARGET:-dev} # use "prod" for production
+    volumes:
+       - ./backend:/usr/src/app/backend
+    environment:
+      - POSTGRES_HOST=db # name of the "db" service
+      - POSTGRES_DB=bunny_books
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=need-to-replace
+      - FRONTEND_URL=http://books.local.bunnyshell.com
+    expose:
+      - 8080
+    ports:
+      - "8080:8080" # for development mode
+    depends_on:
+      - db
+  db:
+    image: postgres
+    restart: always
+    user: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=bunny_books
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=need-to-replace
+    expose:
+      - 5432
+  frontend:
+      container_name: bunnyshell-books-frontend
+      build:
+        context: ./frontend
+        target: ${FRONTEND_BUILD_TARGET:-dev} # use "prod" for production
+        args:
+          REACT_APP_APP_URL: http://books.local.bunnyshell.com
+          REACT_APP_BASE_API: http://books-api.local.bunnyshell.com:8080
+      environment:
+        # reverse proxy vars
+        - VIRTUAL_HOST=books.local.bunnyshell.com
+        - VIRTUAL_PORT=8081
+      volumes:
+        - ./frontend:/var/www/frontend:delegated
+      expose:
+        - 8080
+      ports:
+        - "80:8081" # for development mode
+
+volumes:
+  db-data:
