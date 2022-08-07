@@ -16,7 +16,7 @@ WORKDIR /var/www/frontend
 
 # Build App
 # - copy package.json and package-lock.json (optimise image build - copy only these files and run install, if these change rarely we can reuse this image layer too)
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
 # - install packages (optimise image build - run just install after copying package.json, we hope these will change rarer as the code, so we can reuse this image layer too)
 RUN npm install
@@ -29,7 +29,7 @@ RUN npm run build
 
 EXPOSE 8081
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
 
 # - remove node_modules (optimize to keep image smaller; on prod you don't need them and on dev local you will have them when you mount the folders)
 
