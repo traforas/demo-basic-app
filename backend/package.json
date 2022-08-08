@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-express-sequelize-postgresql",
+  "name": "bunnyshell-books-backend",
   "version": "1.0.0",
-  "description": "Node.js Rest Apis with Express, Sequelize & PostgreSQL",
+  "description": "Node.js Rest API with Express, Sequelize & PostgreSQL",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

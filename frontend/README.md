@@ -4,11 +4,6 @@ This app is a CRUD example, made with React Typescript and Axios to consume Web 
 
 Inspired from https://github.com/bezkoder/react-axios-typescript-example
 
-Summary of app functional requirements:
-- Each Book has id, title, description, availability status.
-- We can create, retrieve, update, delete Books.
-- There is a Search bar for searching Books by title.
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Set port
@@ -38,5 +33,7 @@ yarn start
 ```
 
 Open [http://localhost:8081](http://localhost:8081) to view it in the browser.
+
+If used in the setup provided with docker-compose, open [http://books.local.bunnyshell.com](http://books.local.bunnyshell.com).
 
 The page will reload if you make edits.
