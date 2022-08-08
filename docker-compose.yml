@@ -12,7 +12,7 @@ services:
       - POSTGRES_DB=bunny_books
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=need-to-replace
-      - FRONTEND_URL=${FRONTEND_URL:-https://{{ components.frontend.ingress.hosts[0] }} }
+      - FRONTEND_URL=${FRONTEND_URL:-https://{{ components.frontend.ingress.hosts[0] }}}} }
     ports:
       - "3080:3080"
     depends_on:
