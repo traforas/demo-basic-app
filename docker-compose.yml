@@ -35,11 +35,11 @@ services:
         context: ./frontend
         target: ${FRONTEND_BUILD_TARGET:-prod} # use "dev" for development
         args:
-          REACT_APP_APP_URL: ${FRONTEND_URL:-https://\{\{ components.frontend.ingress.hosts[0] \}\}}
-          REACT_APP_BASE_API: ${BACKEND_URL:-https://\{\{ components.backend.ingress.hosts[0] \}\}}
+          REACT_APP_APP_URL: ${FRONTEND_URL:-https://{{ components.frontend.ingress.hosts[0] }}}
+          REACT_APP_BASE_API: ${BACKEND_URL:-https://{{ components.backend.ingress.hosts[0] }}}
       environment:
         # reverse proxy vars
-        - VIRTUAL_HOST=${FRONTEND_VIRTUAL_HOST:-https://\{\{ components.frontend.ingress.hosts[0] \}\}}
+        - VIRTUAL_HOST=${FRONTEND_VIRTUAL_HOST:-https://{{ components.frontend.ingress.hosts[0] }}}
         - VIRTUAL_PORT=8080
       volumes:
         - ./frontend:/var/www/frontend:delegated
