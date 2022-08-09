@@ -15,8 +15,9 @@ COPY .docker/files /
 WORKDIR /var/www/frontend
 
 # Build App
-# - copy package.json and package-lock.json (optimise image build - copy only these files and run install, if these change rarely we can reuse this image layer too)
+# - copy package.json and yarn.lock (optimise image build - copy only these files and run install, if these change rarely we can reuse this image layer too)
 COPY package*.json ./
+COPY yarn.lock ./
 
 # - install packages (optimise image build - run just install after copying package.json, we hope these will change rarer as the code, so we can reuse this image layer too)
 RUN yarn install
