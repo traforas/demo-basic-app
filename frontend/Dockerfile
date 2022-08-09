@@ -1,6 +1,6 @@
 FROM nginx:alpine as dev
 
-RUN apk add --update npm
+RUN apk add --update yarn
 
 ARG REACT_APP_APP_URL
 ARG REACT_APP_BASE_API
@@ -19,17 +19,17 @@ WORKDIR /var/www/frontend
 COPY package*.json ./
 
 # - install packages (optimise image build - run just install after copying package.json, we hope these will change rarer as the code, so we can reuse this image layer too)
-RUN npm install
+RUN yarn install
 
 # - copy the rest of the code (except the ones in .dockerignore) (optimise image build - we expect these to change everytime, so keep this as late as possible)
 COPY . .
 
 # - build app
-RUN npm run build
+RUN yarn run build
 
 EXPOSE 8081
 
-CMD ["npm", "run", "start"]
+CMD ["yarn", "run", "start"]
 
 # - remove node_modules (optimize to keep image smaller; on prod you don't need them and on dev local you will have them when you mount the folders)
 
