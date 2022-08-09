@@ -1,8 +1,15 @@
 import { Component, ChangeEvent } from "react";
+import { toast } from 'react-toastify';
+import { RouteComponentProps } from 'react-router-dom';
 import BookDataService from "../services/book.service";
 import IBookData from '../types/book.type';
 
-type Props = {};
+interface RouterProps {
+  id: string;
+}
+
+type Props = RouteComponentProps<RouterProps>;
+
 
 type State = IBookData & {
   submitted: boolean
@@ -50,8 +57,10 @@ export default class BookAdd extends Component<Props, State> {
           title: response.data.title,
           description: response.data.description,
           available: response.data.available,
-          submitted: true
+          submitted: false
         });
+        this.props.history.push("/books");
+        toast.success(`The Book ${response.data.title} was added!`);
         console.log(response.data);
       })
       .catch((e: Error) => {
@@ -108,10 +117,11 @@ export default class BookAdd extends Component<Props, State> {
                 name="description"
               />
             </div>
-
-            <button onClick={this.saveBook} className="btn btn-success">
+            <div className="buttons-wrap">
+            <button onClick={this.saveBook} className="btn add-book">
               Add Book
             </button>
+          </div>
           </div>
         )}
       </div>

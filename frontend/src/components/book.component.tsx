@@ -1,6 +1,6 @@
 import { Component, ChangeEvent } from "react";
 import { RouteComponentProps } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 import BookDataService from "../services/book.service";
 import IBookData from "../types/book.type";
 
@@ -92,8 +92,9 @@ export default class Book extends Component<Props, State> {
             ...prevState.currentBook,
             available: status,
           },
-          message: "The availability was updated successfully"
         }));
+        this.props.history.push("/books");
+        toast.success(`The availability was updated successfully`);
         console.log(response.data);
       })
       .catch((e: Error) => {
@@ -111,6 +112,9 @@ export default class Book extends Component<Props, State> {
         this.setState({
           message: "The Book was updated successfully",
         });
+
+        this.props.history.push("/books");
+        toast.success(`The Book was updated successfully`);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -124,7 +128,9 @@ export default class Book extends Component<Props, State> {
         this.setState({
           message: "The Book was deleted successfully",
         });
+        
         this.props.history.push("/books");
+        toast.success(`The Book was deleted successfully`);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -168,8 +174,21 @@ export default class Book extends Component<Props, State> {
                 {currentBook.available ? "Available" : "Lent"}
               </div>
             </form>
-
-            {currentBook.available ? (
+            <div className="edit-btn-wrap">
+            <button
+                type="submit"
+                className="badge badge-success mr-2"
+                onClick={this.updateBook}
+              >
+                Update
+              </button>
+              <button
+                className="badge badge-danger mr-2"
+                onClick={this.deleteBook}
+              >
+                Delete
+              </button>
+              {currentBook.available ? (
               <button
                 className="badge badge-primary mr-2"
                 onClick={() => this.updateAvailable(false)}
@@ -178,27 +197,13 @@ export default class Book extends Component<Props, State> {
               </button>
             ) : (
               <button
-                className="badge badge-primary mr-2"
+                className="badge badge-primary"
                 onClick={() => this.updateAvailable(true)}
               >
                 Return in library
               </button>
             )}
-
-            <button
-              className="badge badge-danger mr-2"
-              onClick={this.deleteBook}
-            >
-              Delete
-            </button>
-
-            <button
-              type="submit"
-              className="badge badge-success"
-              onClick={this.updateBook}
-            >
-              Update
-            </button>
+            </div>
             <p>{this.state.message}</p>
           </div>
         ) : (
