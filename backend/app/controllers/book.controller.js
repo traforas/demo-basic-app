@@ -129,7 +129,7 @@ exports.deleteAll = (req, res) => {
 };
 
 exports.findAllAvailable = (req, res) => {
-  Book.findAll({ where: { published: true } })
+  Book.findAll({ where: { available: true } })
     .then(data => {
       res.send(data);
     })

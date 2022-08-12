@@ -7,7 +7,7 @@ module.exports = app => {
 
   router.get("/", books.findAll);
 
-  router.get("/published", books.findAllAvailable);
+  router.get("/available", books.findAllAvailable);
 
   router.get("/:id", books.findOne);
 
