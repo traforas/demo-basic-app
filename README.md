@@ -34,8 +34,6 @@ In each project directory, you can run:
 
 ```
 npm install
-# or
-yarn install
 ```
 
 or
@@ -44,6 +42,4 @@ or
 
 ```
 npm start
-# or
-yarn start
 ```
