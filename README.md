@@ -1,4 +1,4 @@
-# Bunnyshell Books - Demo App
+# Bunnyshell Books - Demo App Testing
 
 This app is a CRUD example, composed out of a frontend, one backend service and one database.
 Its purpose is to illustrate how you can quickly get started with Bunnyshell.
